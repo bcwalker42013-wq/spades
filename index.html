@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spades Arena - Invitation Tournament. Invite-only Spades tournaments where players pick their partners, bid their own hands, and play to 250 points.">
+  <title>Spades Arena | Invitation Tournament</title>
+  <style>
+    :root {
+      --bg-dark: #0f0f12;
+      --card-dark: #1a1a22;
+      --accent: #c19b4a;
+      --text-light: #ffffff;
+      --text-dim: #9b9ba8;
+      --border-dark: #2a2a33;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+    }
+    * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    header {
+      border-bottom: 1px solid var(--border-dark);
+      background: radial-gradient(circle at 15% 0%, rgba(193,155,74,0.15) 0%, rgba(0,0,0,0) 60%);
+      padding: 1.25rem 1.5rem;
+    }
+    .header-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      gap: .75rem; align-items: center;
+    }
+    .brand { font-weight: 700; font-size: 1.2rem; letter-spacing: .03em; text-transform: uppercase; }
+    .brand span { color: var(--accent); }
+    .tagline { font-size: .85rem; color: var(--text-dim); }
+    main { max-width: 1100px; width: 100%; margin: 0 auto; padding: 2rem 1.5rem 3rem; flex: 1; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
+    @media (min-width: 900px) { .grid { grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr); } }
+    .card { background: var(--card-dark); border-radius: var(--radius-lg); border: 1px solid var(--border-dark); padding: 1.5rem; }
+    .hero-title { font-size: clamp(1.6rem, 2vw + 1rem, 2.1rem); font-weight: 600; margin: 0 0 .4rem; }
+    .hero-title span { color: var(--accent); }
+    .hero-sub { font-size: .95rem; color: var(--text-dim); max-width: 620px; }
+    .next-tournament {
+      margin-top: 1.5rem; background: rgba(193,155,74,0.08);
+      border-radius: var(--radius-md); border: 1px solid rgba(193,155,74,0.4);
+      padding: 1rem 1rem .9rem; font-size: .9rem;
+    }
+    .next-label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .4rem; }
+    .next-main { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: baseline; }
+    .next-main strong { font-size: 1rem; }
+    .next-meta { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; margin-top: .5rem; font-size: .85rem; color: var(--text-light); }
+    .pill { display: inline-block; padding: .25rem .65rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); font-size: .75rem; color: var(--text-dim); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .65rem 1.1rem; border-radius: 999px; border: 0; font-size: .85rem;
+      font-weight: 600; cursor: pointer; margin-top: .9rem; text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { filter: brightness(1.05); }
+    .section-title { font-size: 1.05rem; font-weight: 600; margin-bottom: .4rem; }
+    .section-sub { font-size: .8rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .list { list-style: none; padding: 0; margin: 0; display: grid; gap: .65rem; }
+    .list li { background: rgba(255,255,255,0.03); border-radius: var(--radius-md); border: 1px solid var(--border-dark); padding: .75rem .9rem; font-size: .9rem; }
+    .list strong { color: var(--accent); font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; display: block; margin-bottom: .25rem; }
+    .sidebar-title { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+    .sidebar-sub { font-size: .8rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .fee-box { border-radius: var(--radius-md); border: 1px solid var(--border-dark); background: rgba(255,255,255,0.03); padding: .85rem .9rem; font-size: .9rem; margin-bottom: .5rem; display: flex; justify-content: space-between; gap: 1rem; }
+    .fee-label { font-size: .75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em; }
+    .fee-value { font-size: 1.05rem; font-weight: 600; }
+    .note { font-size: .75rem; color: var(--text-dim); margin-top: .75rem; border-left: 2px solid var(--accent); padding-left: .75rem; }
+    footer { border-top: 1px solid var(--border-dark); padding: 1.25rem 1.5rem 1.75rem; font-size: .75rem; color: var(--text-dim); text-align: center; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="header-inner">
+        <div>
+          <div class="brand"><span>Spades Arena</span> &middot; Tournament Table</div>
+          <div class="tagline">Invite-only Spades. One account. Real partners. First to 250 wins.</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <!-- Left Section -->
+        <section class="card">
+          <h1 class="hero-title"><span>Spades Arena</span> — Invitation Tournament</h1>
+          <p class="hero-sub">This page lays out the house rules and format for the online Spades tournament. Every player logs in with a permanent username and password, gets invited to specific brackets, and chooses their own partner before the first hand is dealt.</p>
+
+          <div class="next-tournament">
+            <div class="next-label">Next Tournament</div>
+            <div class="next-main">
+              <strong>Saturday, March 15, 2025</strong>
+              <span>7:00 PM (Central)</span>
+            </div>
+            <div class="next-meta">
+              <span class="pill">$25 entry / per player</span>
+              <span class="pill">Online — invite only</span>
+              <span class="pill">First team to 250 points</span>
+            </div>
+            <a class="btn btn-primary" href="https://your-contact-link-here" target="_blank" rel="noopener">Request an Invite</a>
+          </div>
+
+          <div style="margin-top: 1.75rem;">
+            <div class="section-title">How the Tournament Works</div>
+            <ul class="list">
+              <li><strong>One-time account</strong>Create your username and password once. It’s used for every future tournament, so your record follows you.</li>
+              <li><strong>Invitation only</strong>When a new bracket is announced, invited players receive a link to join.</li>
+              <li><strong>Pick your partner</strong>After accepting the invite, you choose your partner. They confirm and the team locks in.</li>
+              <li><strong>First to 250</strong>Each match is scored to 250 under the house rules below.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top: 1.75rem;">
+            <div class="section-title">House Rules</div>
+            <ul class="list">
+              <li><strong>Every hand bids itself</strong>Each player bids their own hand. Team bid = Player A + Player B bids.</li>
+              <li><strong>Ace high</strong>Ranking: A, K, Q, J, 10 ... 2. No jokers.</li>
+              <li><strong>Open & closed bidding</strong>Host decides if bids are shown or hidden until all are in.</li>
+              <li><strong>No Nil</strong>Every player must bid at least one book.</li>
+              <li><strong>No over points</strong>Only earn points for what you bid — no bags.</li>
+              <li><strong>Spade stick to the table</strong>You must follow suit. Spades can’t be led until broken.</li>
+              <li><strong>Don’t force a renege</strong>The system prevents illegal plays.</li>
+              <li><strong>The Yard — 10 books</strong>Calling 10 books earns +20 if successful, or a 200-point penalty if failed.</li>
+              <li><strong>Win condition</strong>First team to reach 250 points wins.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Right Section -->
+        <aside class="card">
+          <div class="sidebar-title">Entry & Payout Structure</div>
+          <div class="fee-box">
+            <div><span class="fee-label">Entry fee</span><span class="fee-value">$25</span></div>
+            <div><span class="fee-label">Per player</span><span>2 players per team</span></div>
+          </div>
+          <div class="fee-box">
+            <div><span class="fee-label">Prize pool</span><span class="fee-value">$20</span></div>
+            <div><span class="fee-label">House fee</span><span>$5 host/platform</span></div>
+          </div>
+          <p class="note">Example: 32 players = $800 total. $640 prize pool, $160 host fee. The host also keeps 10% of profit after payouts.</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      Spades Arena is a closed tournament environment. One account per player. All bids and books are logged.<br>
+      No Nil. No Bags. No excuses.<br>
+      © 2025 Spades Arena Tournament Platform
+    </footer>
+  </div>
+</body>
+</html>
