@@ -74,6 +74,21 @@
     .fee-label { font-size: .75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em; }
     .fee-value { font-size: 1.05rem; font-weight: 600; }
     .note { font-size: .75rem; color: var(--text-dim); margin-top: .75rem; border-left: 2px solid var(--accent); padding-left: .75rem; }
+    /* Contact section */
+    .contact-embed {
+      margin-top: 2rem;
+      background: var(--card-dark);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-dark);
+      padding: 1.5rem;
+    }
+    .contact-embed iframe {
+      width: 100%;
+      min-height: 900px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+    }
     footer { border-top: 1px solid var(--border-dark); padding: 1.25rem 1.5rem 1.75rem; font-size: .75rem; color: var(--text-dim); text-align: center; }
   </style>
 </head>
@@ -83,7 +98,7 @@
     <header>
       <div class="header-inner">
         <div>
-          <div class="brand"><span>Spades Arena</span> &middot; Tournament Table</div>
+          <div class="brand"><span>Spades Arena</span> · Tournament Table</div>
           <div class="tagline">Invite-only Spades. One account. Real partners. First to 250 wins.</div>
         </div>
       </div>
@@ -94,7 +109,11 @@
         <!-- Left Section -->
         <section class="card">
           <h1 class="hero-title"><span>Spades Arena</span> — Invitation Tournament</h1>
-          <p class="hero-sub">This page lays out the house rules and format for the online Spades tournament. Every player logs in with a permanent username and password, gets invited to specific brackets, and chooses their own partner before the first hand is dealt.</p>
+          <p class="hero-sub">
+            This page lays out the house rules and format for the online Spades tournament.
+            Every player logs in with a permanent username and password, gets invited to
+            specific brackets, and chooses their own partner before the first hand is dealt.
+          </p>
 
           <div class="next-tournament">
             <div class="next-label">Next Tournament</div>
@@ -107,7 +126,10 @@
               <span class="pill">Online — invite only</span>
               <span class="pill">First team to 250 points</span>
             </div>
-            <a class="btn btn-primary" href="https://your-contact-link-here" target="_blank" rel="noopener">Request an Invite</a>
+            <!-- UPDATED BUTTON: links to your contact page -->
+            <a class="btn btn-primary" href="https://www.play4u119.online/contact" target="_blank" rel="noopener">
+              Request an Invite & Create Username
+            </a>
           </div>
 
           <div style="margin-top: 1.75rem;">
@@ -139,6 +161,9 @@
         <!-- Right Section -->
         <aside class="card">
           <div class="sidebar-title">Entry & Payout Structure</div>
+          <div class="sidebar-sub">
+            This explains how the money flows so there’s no confusion about where the pot goes.
+          </div>
           <div class="fee-box">
             <div><span class="fee-label">Entry fee</span><span class="fee-value">$25</span></div>
             <div><span class="fee-label">Per player</span><span>2 players per team</span></div>
@@ -147,9 +172,26 @@
             <div><span class="fee-label">Prize pool</span><span class="fee-value">$20</span></div>
             <div><span class="fee-label">House fee</span><span>$5 host/platform</span></div>
           </div>
-          <p class="note">Example: 32 players = $800 total. $640 prize pool, $160 host fee. The host also keeps 10% of profit after payouts.</p>
+          <p class="note">
+            Example: 32 players = $800 total. $640 prize pool, $160 host fee.
+            The host also keeps 10% of profit after payouts.
+          </p>
         </aside>
       </div>
+
+      <!-- EMBEDDED CONTACT FORM SECTION -->
+      <section class="contact-embed">
+        <div class="section-title">Request an Invite & Create Your Username</div>
+        <div class="section-sub">
+          Use the form below to request a spot in the next tournament. Be sure to enter:
+          <strong>your preferred username</strong>, email, and phone so we can confirm your seat and send your private game link.
+        </div>
+        <!-- This iframe shows your existing contact page inside this GitHub page -->
+        <iframe
+          src="https://www.play4u119.online/contact"
+          title="Spades Arena Contact Form">
+        </iframe>
+      </section>
     </main>
 
     <footer>
